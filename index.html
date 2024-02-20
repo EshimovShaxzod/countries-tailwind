@@ -1,16 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Countries</title>
+    <link rel="stylesheet" href="./css/style.css" />
 </head>
-<body>
+<body class="dark:bg-[hsl(206,18%,16%)]">
+    <!-- HEADER START -->
+    <header class="dark:bg-[#2b3844] py-6 shadow-md">
+        <div class="w-full mx-auto px-16 max-[640px]:px-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl dark:color-white dark:text-white">
+                    Where in the world?
+                </h1>
+                <div class="flex items-center">
+                    <button class="mode-btn ms-4">
+                        <img
+                        class="mode-icon me-3 w-[30px]"
+                        src="./images/sun.svg"
+                        alt="sun logo"
+                        />
+                    </button>
+                    <h3 class="text-xl max-[710px]:hidden dark:text-white">Dark Mode</h3>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- HEADER END -->
     
+<!-- MAIN START -->
+<main>
+    <section class="pt-8 search-country">
+        <div class="w-full mx-auto px-16">
+            <div class="flex items-center justify-between max-[710px]:flex-col">
+                <form
+                class="max-[710px]:mb-12 country-form shadow-md border flex items-center p-3 max-w-[400px] dark:bg-[#2b3844] border-none"
+                >
+                <label class="me-3">
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-search"
+                    >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </label>
+            <input
+            class="country-input outline-none dark:bg-[#2b3844]"
+            type="text"
+            placeholder="Search Countries"
+            />
+        </form>
+        <select
+        class="select select-info w-full max-w-xs py-3 px-2 drop-shadow-md bg-white dark:bg-[#2b3844] dark:text-white"
+        >
+        <option disabled selected value="Filter by Region">
+            Filter by Region
+        </option>
+    </select>
+</div>
+</div>
+</section>
 
+<section class="pt-20 lg:pt-[120px] pb-10 lg:pb-20 countries-section relative">
+    <div class="w-full mx-auto px-16 max-[640px]:px-8">
+        <div class="grid max-[640px]:grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3  gap-3 -mx-4 countries-results"></div>
+    </div>
+
+    <div class="loader blur-[1px] absolute flex items-center justify-center top-0 left-0  w-[100%] h-screen">
+        <div class=" z-10 inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
+          <span class=" z-50 !absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+        </div>
+    </div>
+</section>
+
+<div class="w-full max-[640px]:px-8 mx-auto max-[856px]:px-6 px-16 about-country">
+</div>
+</main>
+<!-- MAIN END -->
+
+
+
+<!-- CARDS TEMPLATE -->
+
+<template class="cards-template"> 
+    <div class="max-[640px]:max-w-[100%] w-full dark:bg-[#2b3844] rounded-sm max-w-[264px]">
+        <img class="h-[160px] max-[640px]:h-[260px] object-cover mb-3 country-img" width="100%" src="" alt="">
+        <h3 class="country-title text-xl ps-3 dark:text-white count-name hover:text-blue-700 cursor-pointer"></h3>
+        <ul>
+            <li class="ps-3 flex itemc-center">
+                <h3 class="dark:text-white me-2">Population:</h3>
+                <p class="country-population dark:text-white"></p>
+            </li>
+            <li class="ps-3 flex itemc-center">
+                <h3 class="dark:text-white me-2">Region:</h3>
+                <p class="country-region dark:text-white"></p>
+            </li>
+            <li class="ps-3 pb-3 flex itemc-center">
+                <h3 class="dark:text-white me-2">Capital:</h3>
+                <p class="country-capital dark:text-white"></p>
+            </li>
+        </ul>
+    </div>
     
+</template>
 
-    <script src="js/main.js"></script>
+<!-- CARD ABOUT TEMPLATE -->
+
+<template class="about-card-template">
+    <div class="about-country">
+        <a class="flex items-center justify-center shadow-md mt-12 w-24 px-2 py-1 dark:text-white dark:bg-[#2b3844] active:text-red-500" href="index.html">
+            <i class='bx bxs-left-arrow-alt dark:text-white text-2xl mt-[2px]'></i>
+            Back
+        </a>
+        <div class="w-full grid  max-[884px]:grid-cols-1  md:grid-cols-2  mt-8">
+            <img class="about-cy-image w-full max-w-[560px] max-[768px]:mb-12" src="" alt="">
+            <div class="w-full ms-6">
+                <h1 class="dark:text-white text-3xl mb-3 about-cy-name"></h1>
+                <div class="grid sm:grid-cols-2">
+                    <ul class="me-16 max-[444px]:g-4">
+                        <li class="flex">
+                            <h3 class="dark:text-white me-1">Native Name:</h3>
+                            <p class="dark:text-white  about-cy-nativeName">${cout.name.official}</p>
+                        </li>
+                        <li class="flex">
+                            <h3 class="dark:text-white me-1">Population:</h3>
+                            <p class="dark:text-white about-cy-population"></p>
+                        </li>
+                        <li class="flex">
+                            <h3 class="dark:text-white me-1">Region:</h3>
+                            <p class="dark:text-white about-cy-region">${cout.region}</p>
+                        </li>
+                        <li class="flex">
+                            <h3 class="dark:text-white me-1">Sub Region:</h3>
+                            <p class="dark:text-white about-cy-subRegion"></p>
+                        </li>
+                        <li class="flex">
+                            <h3 class="dark:text-white me-1">Capital:</h3>
+                            <p class="dark:text-white about-cy-capital">${cout.capital}</p>
+                        </li>
+                    </ul>
+                    <ul class="me-4">
+                        <li class="flex">
+                            <h3 class="dark:text-white me-1">Top Level Domain:</h3>
+                            <p class="dark:text-white about-cy-domain"></p>
+                        </li>
+                        <li class="flex">
+                            <h3 class="dark:text-white me-1">Currencies:</h3>
+                            <p class="dark:text-white about-cy-currencies"></p>
+                        </li>
+                        <li class="flex">
+                            <h3 class="dark:text-white me-1">Languages:</h3>
+                            <p class="dark:text-white about-cy-language"></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script src="js/main.js"></script>
+<script src="js/dark-mode.js"></script>
 </body>
 </html>
